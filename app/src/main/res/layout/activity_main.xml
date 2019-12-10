@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/black"/>
+
+    <TextureView
+        android:id="@+id/cameraView"
+        style="@style/centerView"/>
+
+    <RelativeLayout
+        android:id="@+id/drawSurface"
+        style="@style/centerView"/>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/centerView"
+        android:background="@android:color/transparent">
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:enabled="true"
+            android:onClick="takePicture"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/camera_button"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
