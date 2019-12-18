@@ -78,9 +78,11 @@ public class DetectHandler extends Handler
 
     public void detectRectangle(Mat mat)
     {
+        //save original size to restore point of downscaled image
         double realWidth = mat.size().width;
         double realHeight = mat.size().height;
 
+        //downscale original image
         double ratio = (realHeight / realWidth) * 2;
         int width = Double.valueOf(realWidth / ratio).intValue();
         int height = Double.valueOf(realHeight / ratio).intValue();
@@ -128,6 +130,7 @@ public class DetectHandler extends Handler
 
                     for( int j = 0; j < 4 ; ++j)
                     {
+                        //save restored downscaled point
                         rescaledPoints[j] = new Point((int)(points[j].x*ratio), (int)(points[j].y*ratio));
                     }
 
@@ -167,11 +170,6 @@ public class DetectHandler extends Handler
         srcPoints = null;
 
         return result;
-    }
-
-    public void setDetectRunning(boolean imageDetectRunning)
-    {
-        this.imageDetectRunning = imageDetectRunning;
     }
 
     public boolean isImageDetectRunning()

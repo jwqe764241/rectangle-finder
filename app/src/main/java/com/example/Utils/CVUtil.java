@@ -29,7 +29,6 @@ public class CVUtil
 
         int chromaPixelStride = planes[1].getPixelStride();
 
-
         if (chromaPixelStride == 2) { // Chroma channels are interleaved
             assert (planes[0].getPixelStride() == 1);
             assert (planes[2].getPixelStride() == 2);

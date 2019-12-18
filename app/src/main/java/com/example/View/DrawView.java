@@ -46,18 +46,6 @@ public class DrawView extends View
         this.currentMat = currentMat;
     }
 
-    public Mat getCurrentMat()
-    {
-        if(currentMat != null)
-        {
-            return currentMat.clone();
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     public Size getCurrentMatSize()
     {
         return currentMat.size();
