@@ -1,11 +1,13 @@
 package com.example.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
@@ -131,6 +133,20 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         saveButton = findViewById(R.id.saveButton);
 
         mediaScanner = new MediaScanner(getApplicationContext());
+
+        if(!hasPermissions(PERMISSIONS))
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error");
+            builder.setMessage("You must grant permissions to use this app.");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+
+            builder.create().show();
+        }
     }
 
     @Override
