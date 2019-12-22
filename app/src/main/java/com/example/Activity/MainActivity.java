@@ -133,19 +133,31 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         saveButton = findViewById(R.id.saveButton);
 
         mediaScanner = new MediaScanner(getApplicationContext());
+    }
 
-        if(!hasPermissions(PERMISSIONS))
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        switch (requestCode)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Error");
-            builder.setMessage("You must grant permissions to use this app.");
-            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
+            case PERMISSIONS_REQUEST_CODE:
+            {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED)
+                {
+                    // granted
+                } else
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Error");
+                    builder.setMessage("You must grant permissions to use this app.");
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.create().show();
                 }
-            });
-
-            builder.create().show();
+            }
         }
     }
 
@@ -347,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         {
             Image image = imageReader.acquireNextImage();
 
-            if(!detectHandler.isImageDetectRunning())
+            if(detectHandler != null && !detectHandler.isImageDetectRunning())
             {
                 Mat mat = CVUtil.yuvImageToRgbMat(image);
                 Core.rotate(mat, mat, Core.ROTATE_90_CLOCKWISE);
