@@ -6,7 +6,7 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
-import com.example.Activity.MainActivity;
+import com.example.Activity.CaptureActivity;
 import com.example.Message.ProcessMessage;
 
 import org.opencv.core.CvType;
@@ -25,15 +25,15 @@ import java.util.List;
 
 public class DetectHandler extends Handler
 {
-    MainActivity mainActivity;
+    CaptureActivity captureActivity;
     Mat matTemp;
 
     boolean imageDetectRunning = false;
 
-    public DetectHandler(Looper lopper, MainActivity mainActivity)
+    public DetectHandler(Looper lopper, CaptureActivity captureActivity)
     {
         super(lopper);
-        this.mainActivity = mainActivity;
+        this.captureActivity = captureActivity;
     }
 
     final Comparator<Point> sumComparator = new Comparator<Point>() {
@@ -142,8 +142,8 @@ public class DetectHandler extends Handler
             approx.release();
         }
 
-        mainActivity.setDrawPoint(drawPoint, mat.clone());
-        mainActivity.redrawSurface();
+        captureActivity.setDrawPoint(drawPoint, mat.clone());
+        captureActivity.redrawSurface();
 
         //release memory
         for(MatOfPoint p : contours)

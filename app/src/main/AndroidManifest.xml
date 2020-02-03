@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:requestLegacyExternalStorage="true">
-        <activity android:name=".Activity.MainActivity"
+        <activity android:name=".Activity.CaptureActivity"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation">
             <intent-filter>

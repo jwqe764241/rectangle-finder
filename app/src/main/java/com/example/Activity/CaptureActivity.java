@@ -64,7 +64,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MainActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener
+public class CaptureActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener
 {
     static
     {
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_capture);
 
         cameraView = findViewById(R.id.cameraView);
 
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         @Override
         public void onOpened(@NonNull CameraDevice cameraDevice)
         {
-            MainActivity.this.cameraDevice = cameraDevice;
+            CaptureActivity.this.cameraDevice = cameraDevice;
             try
             {
                 startPreview();
@@ -255,14 +255,14 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         public void onDisconnected(@NonNull CameraDevice cameraDevice)
         {
             cameraDevice.close();
-            MainActivity.this.cameraDevice = null;
+            CaptureActivity.this.cameraDevice = null;
         }
 
         @Override
         public void onError(@NonNull CameraDevice cameraDevice, int error)
         {
             cameraDevice.close();
-            MainActivity.this.cameraDevice = null;
+            CaptureActivity.this.cameraDevice = null;
 
         }
     };
