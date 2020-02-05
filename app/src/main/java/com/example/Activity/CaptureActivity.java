@@ -254,6 +254,8 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
         @Override
         public void onDisconnected(@NonNull CameraDevice cameraDevice)
         {
+            closePreviewThread();
+            closeDetectThread();
             cameraDevice.close();
             CaptureActivity.this.cameraDevice = null;
         }
@@ -261,6 +263,8 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
         @Override
         public void onError(@NonNull CameraDevice cameraDevice, int error)
         {
+            closePreviewThread();
+            closeDetectThread();
             cameraDevice.close();
             CaptureActivity.this.cameraDevice = null;
 
