@@ -185,9 +185,9 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
     @Override
     public void onPause()
     {
-        closeCamera();
         closePreviewThread();
         closeDetectThread();
+        closeCamera();
 
         super.onPause();
     }
@@ -195,9 +195,9 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
     @Override
     public void onDestroy()
     {
-        closeCamera();
         closePreviewThread();
         closeDetectThread();
+        closeCamera();
 
         super.onDestroy();
     }
