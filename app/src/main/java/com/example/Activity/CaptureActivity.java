@@ -664,17 +664,15 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
         }
 
         Point[] points = null;
-        try
-        {
-            points = drawView.getPoint(0);
-        }
-        catch(IndexOutOfBoundsException e)
+        points = CVUtil.detectRectangle(mat);
+
+        if(points == null)
         {
             Toast.makeText(this, "Can't find document", Toast.LENGTH_SHORT).show();
-            mat.release();
             return;
         }
 
+        /*
         float widthRatio = (float)mat.size().width / (float) drawView.getCurrentMatSize().width;
         float heightRatio = (float)mat.size().height / (float) drawView.getCurrentMatSize().height;
 
@@ -683,8 +681,9 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
         {
             stretchedPoints[i] = new Point(points[i].x * widthRatio, points[i].y * heightRatio);
         }
+        */
 
-        Mat transformedImage = CVUtil.getPerspectiveTransformImageOfPoint(mat, stretchedPoints);
+        Mat transformedImage = CVUtil.getPerspectiveTransformImageOfPoint(mat, points);
 
         saveMatrixAsImage(transformedImage);
 

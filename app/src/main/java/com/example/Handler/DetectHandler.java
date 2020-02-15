@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.Activity.CaptureActivity;
 import com.example.Message.ProcessMessage;
+import com.example.Utils.CVUtil;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -35,26 +36,6 @@ public class DetectHandler extends Handler
         super(lopper);
         this.captureActivity = captureActivity;
     }
-
-    final Comparator<Point> sumComparator = new Comparator<Point>() {
-        @Override
-        public int compare(Point lhs, Point rhs) {
-            return Double.valueOf(lhs.y + lhs.x).compareTo(rhs.y + rhs.x);
-        }
-    };
-    final Comparator<Point> diffComparator = new Comparator<Point>() {
-        @Override
-        public int compare(Point lhs, Point rhs) {
-            return Double.valueOf(lhs.y - lhs.x).compareTo(rhs.y - rhs.x);
-        }
-    };
-
-   final Comparator<MatOfPoint> equalComparator =  new Comparator<MatOfPoint>() {
-        @Override
-        public int compare(MatOfPoint lhs, MatOfPoint rhs) {
-            return Double.valueOf(Imgproc.contourArea(rhs)).compareTo(Imgproc.contourArea(lhs));
-        }
-    };
 
     @Override
     public void handleMessage(@NonNull Message msg)
@@ -104,7 +85,7 @@ public class DetectHandler extends Handler
         Imgproc.findContours(matTemp, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
         hierarchy.release();
 
-        Collections.sort(contours, equalComparator);
+        Collections.sort(contours, CVUtil.equalComparator);
 
         List<Point[]> drawPoint = new ArrayList<>();
 
@@ -134,7 +115,7 @@ public class DetectHandler extends Handler
                         rescaledPoints[j] = new Point((int)(points[j].x*ratio), (int)(points[j].y*ratio));
                     }
 
-                    drawPoint.add(sortPoints(rescaledPoints));
+                    drawPoint.add(CVUtil.sortPoints(rescaledPoints));
                 }
 
                 points = null;
@@ -155,21 +136,6 @@ public class DetectHandler extends Handler
         drawPoint = null;
 
         imageDetectRunning = false;
-    }
-
-    private Point[] sortPoints( Point[] src )
-    {
-        ArrayList<Point> srcPoints = new ArrayList<>(Arrays.asList(src));
-        Point[] result = { null , null , null , null };
-
-        result[0] = Collections.min(srcPoints, sumComparator);
-        result[2] = Collections.max(srcPoints, sumComparator);
-        result[1] = Collections.min(srcPoints, diffComparator);
-        result[3] = Collections.max(srcPoints, diffComparator);
-
-        srcPoints = null;
-
-        return result;
     }
 
     public boolean isImageDetectRunning()
