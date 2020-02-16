@@ -672,17 +672,6 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
             return;
         }
 
-        /*
-        float widthRatio = (float)mat.size().width / (float) drawView.getCurrentMatSize().width;
-        float heightRatio = (float)mat.size().height / (float) drawView.getCurrentMatSize().height;
-
-        Point[] stretchedPoints = new Point[points.length];
-        for(int i = 0; i < points.length; ++i)
-        {
-            stretchedPoints[i] = new Point(points[i].x * widthRatio, points[i].y * heightRatio);
-        }
-        */
-
         Mat transformedImage = CVUtil.getPerspectiveTransformImageOfPoint(mat, points);
 
         saveMatrixAsImage(transformedImage);
