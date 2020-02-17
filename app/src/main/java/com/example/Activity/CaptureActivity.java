@@ -550,29 +550,39 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
         }
     }
 
-    private void startPreviewThread()
+    private void closeDetectThread()
     {
-        previewThread = new HandlerThread("CameraPreview");
-        previewThread.start();
-        previewHandler = new Handler(previewThread.getLooper());
+        if(detectThread != null)
+        {
+            try
+            {
+                detectThread.join();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+            detectThread.quitSafely();
+            detectThread = null;
+            detectHandler = null;
+        }
     }
 
     private void closePreviewThread()
     {
         if(previewThread != null )
         {
-            previewThread.quitSafely();
-
             try
             {
                 previewThread.join();
-                previewThread = null;
-                previewHandler = null;
             }
-            catch(InterruptedException e)
+            catch (InterruptedException e)
             {
                 e.printStackTrace();
             }
+            previewThread.quitSafely();
+            previewThread = null;
+            previewHandler = null;
         }
     }
 
@@ -598,22 +608,11 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
         }
     }
 
-    private void closeDetectThread()
+    private void startPreviewThread()
     {
-        if(detectThread != null)
-        {
-            detectThread.quitSafely();
-            try
-            {
-                detectThread.join();
-                detectThread = null;
-                detectHandler = null;
-            }
-            catch(InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
+        previewThread = new HandlerThread("CameraPreview");
+        previewThread.start();
+        previewHandler = new Handler(previewThread.getLooper());
     }
 
     private String getBackCameraId() throws CameraAccessException
