@@ -554,14 +554,6 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
     {
         if(detectThread != null)
         {
-            try
-            {
-                detectThread.join();
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
             detectThread.quitSafely();
             detectThread = null;
             detectHandler = null;
@@ -572,14 +564,6 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
     {
         if(previewThread != null )
         {
-            try
-            {
-                previewThread.join();
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
             previewThread.quitSafely();
             previewThread = null;
             previewHandler = null;
