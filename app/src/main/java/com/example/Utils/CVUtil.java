@@ -1,9 +1,6 @@
 package com.example.Utils;
 
-import android.graphics.Bitmap;
 import android.media.Image;
-import android.util.Log;
-import android.widget.Toast;
 
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
@@ -22,7 +19,6 @@ import java.util.List;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
-import static org.opencv.core.CvType.CV_8UC1;
 
 public class CVUtil
 {

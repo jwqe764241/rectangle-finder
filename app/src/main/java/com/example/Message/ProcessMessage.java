@@ -1,9 +1,6 @@
 package com.example.Message;
 
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
-
-import java.util.ArrayList;
 
 public class ProcessMessage
 {
