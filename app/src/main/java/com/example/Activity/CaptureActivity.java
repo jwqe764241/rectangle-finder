@@ -662,28 +662,6 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
         transformedImage.release();
     }
 
-    @Override
-    public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height)
-    {
-        openCamera();
-    }
-
-    @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture)
-    {
-    }
-
-    @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int width, int height)
-    {
-    }
-
-    @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture)
-    {
-        return true;
-    }
-
     private void saveMatrixAsImage(Mat mat)
     {
         final String TAG = "save";
@@ -727,6 +705,28 @@ public class CaptureActivity extends AppCompatActivity implements TextureView.Su
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height)
+    {
+        openCamera();
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture)
+    {
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int width, int height)
+    {
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture)
+    {
+        return true;
     }
 
     private Size getPictureSize(Size[] sizes, double widthRatio, double heightRatio)
