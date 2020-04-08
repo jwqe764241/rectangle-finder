@@ -184,6 +184,9 @@ public class CVUtil
         int width = Double.valueOf(realWidth / ratio).intValue();
         int height = Double.valueOf(realHeight / ratio).intValue();
 
+        //detected rectangle's area must be bigger than this
+        double minimumArea = (double)(width * height) * (10.0 / 100.0);
+
         Size matSize = new Size(width,height);
 
         Mat matTemp = new Mat(matSize, CvType.CV_8UC4);
@@ -213,7 +216,7 @@ public class CVUtil
 
             double area = Math.abs(Imgproc.contourArea(approx));
 
-            if(area > 10000)
+            if(area >= minimumArea)
             {
                 int size = (int)approx.total();
                 Point[] points = approx.toArray();

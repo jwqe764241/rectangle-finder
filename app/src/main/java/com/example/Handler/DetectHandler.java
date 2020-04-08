@@ -66,6 +66,9 @@ public class DetectHandler extends Handler
         int width = Double.valueOf(realWidth / ratio).intValue();
         int height = Double.valueOf(realHeight / ratio).intValue();
 
+        //detected rectangle's area must be bigger than this
+        double minimumArea = (double)(width * height) * (10.0 / 100.0);
+
         Size matSize = new Size(width,height);
 
         if(matTemp == null)
@@ -98,7 +101,7 @@ public class DetectHandler extends Handler
 
             double area = Math.abs(Imgproc.contourArea(approx));
 
-            if(area > 10000)
+            if(area >= minimumArea)
             {
                 int size = (int)approx.total();
                 Point[] points = approx.toArray();
