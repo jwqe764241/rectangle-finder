@@ -181,8 +181,8 @@ public class CVUtil
 
         //downscale original image
         double ratio = (realHeight / realWidth) * 2;
-        int width = Double.valueOf(realWidth / ratio).intValue();
-        int height = Double.valueOf(realHeight / ratio).intValue();
+        double width = realWidth / ratio;
+        double height = realHeight / ratio;
 
         //detected rectangle's area must be bigger than this
         double minimumArea = (double)(width * height) * (10.0 / 100.0);
