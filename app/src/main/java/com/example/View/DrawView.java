@@ -9,7 +9,6 @@ import android.view.View;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
-import org.opencv.core.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,16 +43,6 @@ public class DrawView extends View
         }
 
         this.currentMat = currentMat;
-    }
-
-    public Size getCurrentMatSize()
-    {
-        return currentMat.size();
-    }
-
-    public Point[] getPoint(int index)
-    {
-        return drawPoint.get(index);
     }
 
     @Override
